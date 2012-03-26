@@ -1,0 +1,37 @@
+!!! 5
+%html(lang="en")
+  %head
+    %meta(charset="utf-8")
+    %title #{(title ? title + " - " : "")}Cibo - Blog
+    %meta(name="description" content="")
+    %meta(name="keywords" content="")
+    %meta(name="viewport" content="width=device-width")
+    %link(href="/css/style.css" rel="stylesheet")
+    %link(href="/css/print.css" rel="stylesheet" media="print")
+    %link(rel="alternate" type="application/rss+xml" title="RSS 2.0" href="/feed.xml")
+    %link(href="/favicon.ico" rel="icon" type="image/x-icon")
+  %body
+    #container
+      #header
+        %nav 
+          %a{href: "/"}
+            %img.logo{src: "/images/logo-20.png", alt: "Cibo"}
+            .tagline
+              %p Réduisons la faim en éliminant le gaspillage.
+      = content
+      
+      #footer
+        %p Le contenu des articles est la propriété de leurs auteurs. 
+        %p Le design est largement inspiré du travail de &nbsp;
+          %a{href: "http://bengourley.co.uk"} Ben Gourley
+          %span &nbsp;réalisé sur le site&nbsp;
+          %a{href: "http://howtonode.org"} HowToNode.org.
+        %p Serveur wheat tournant sur node.js #{process.version}.
+    :script
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    :script
+      try {
+      var pageTracker = _gat._getTracker("UA-28715617-3");
+      pageTracker._trackPageview();
+      } catch(err) {}

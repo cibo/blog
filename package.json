@@ -1,0 +1,22 @@
+{
+  "author": "Rémy Loubradou <remy.loubradou@gmail.com>",
+  "name": "blog.cibo.io",
+  "description": "Blog of Cibo",
+  "version": "0.0.0",
+  "homepage": "http://blog.cibo.io",
+  "private" : "true",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cibo/blog.git"
+  },
+  "engines": {
+    "node": ">=0.4.0"
+  },
+  "dependencies": {
+    "stack": ">=0.0.3",
+    "creationix": ">=0.1.2",
+    "wheat": ">=0.2.0",
+    "cluster": ">=0.6.4"
+  },
+  "devDependencies": {}
+}

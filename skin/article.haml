@@ -1,0 +1,93 @@
+#main
+  .article
+    :if article.version
+      %a.sha-version{ href: "/#{article.version}/#{article.name}" } Static Version
+    %h1
+      %a{href: "/" + article.name}&= article.title
+    = markdownEncode(article.markdown)
+    %hr{style:"clear:both"}
+    #disqus_thread.body
+    :script
+      var disqus_url = "http://ciboblog/#{article.name}";
+    %script(src="http://disqus.com/forums/ciboblog/embed.js" type="text/javascript")
+    %a.view-thread(href="http://disqus.com/forums/ciboblog/?url=ref")
+      View the discussion thread.
+    %a.dsq-brlink(href="http://disqus.com")
+      blog comments powered by
+      %span.logo-disqus
+        Disqus
+    :script
+      (function() {
+        var links = document.getElementsByTagName('a');
+        var query = '?';
+        for(var i = 0; i < links.length; i++) {
+          if(links[i].href.indexOf('#disqus_thread') >= 0) {
+            query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&amp;';
+          }
+        }
+        document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/ciboblog/get_num_replies.js' + query + '"></' + 'script>');
+      })();
+
+
+#sidebar
+  .aside.author
+    %h4 A propos de l'auteur
+    %img.headshot{src: gravitar(author.email) }
+    %dl
+      %dt Nom:
+      %dd&= author.name
+    :if author.twitter
+      %dl
+        %dt Twitter:
+        %dd= twitter(author.twitter)
+    :if author.location
+      %dl
+        %dt Localisation:
+        %dd&= author.location
+    :if author.homepage
+      %dl
+        %dt Liens:
+        %dd
+          %a{href: author.homepage} Site personnel
+
+  .aside
+    %h4
+      A propos de l'article
+    %a.twitter-share-button{href:"http://twitter.com/share",data-count:"horizontal",data-via:"cibo_io"}
+      Tweet
+    %script{src:"http://platform.twitter.com/widgets.js"}
+    :if article.date
+      %dl{title: article.date}
+        %dt
+          Date de publication:
+        %dd
+          &= formatDate(article.date, "Le %e/%m/%Y à %Hh%M")
+    :if article.lastUpdated
+      %dl{title: article.lastUpdated}
+        %dt
+          Date de la dernière mise à jour:
+        %dd
+          &= formatDate(article.lastUpdated, "Le %e/%m/%Y à %Hh%M")
+
+    %dl
+      %dt
+        Historique:
+      %dd
+        %ul
+          :each version, stat in article.log
+            %li{title: stat.message}
+              %a{ href: "/#{version}/#{article.name}" }
+                &= formatDate(new Date(stat.date).toUTCString(), "Le %e/%m/%Y à %Hh%M")
+
+  :if article.related && article.related.length > 0
+    .bubble
+      %h4
+        Les autres articles écrit par cet auteur:
+      %ul
+        :each related in article.related
+          %li
+            %a{href: "/" + related.name}&=related.title
+            :if related.node
+              %span.versiontag&= related.node
+
+  .bubble= markdownEncode(description)

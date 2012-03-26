@@ -1,0 +1,23 @@
+#main.index
+  :each article in articles.slice(0,15)
+    .article
+      .author
+        %img{src:gravitar(article.author.email, 30)}
+        Par #{article.author.name}
+        .date{title: article.date}&= formatDate(article.date, "%Y.%m.%d")
+      %h3
+        %a{href: "/" + article.name}&= article.title
+      = intro(article.markdown)
+      %a.more{href: "/" + article.name} En lire plus...
+
+#sidebar
+  .aside
+    = markdownEncode(description)
+  .bubble
+    %h4
+      Articles
+    %ul
+      :each article in articles.slice(0,20)
+        %li
+          %a{href: "/" + article.name}&=article.title
+          &=" par " + article.author.name
