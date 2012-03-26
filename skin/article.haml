@@ -8,12 +8,14 @@
     %hr{style:"clear:both"}
     #disqus_thread.body
     :script
-      var disqus_url = "http://ciboblog/#{article.name}";
+      var disqus_url = "http://blog.cibo.io/#{article.name}";
+      var disqus_shortname = 'ciboblog';
+      var disqus_identifier = "#{article.name}";
     %script(src="http://disqus.com/forums/ciboblog/embed.js" type="text/javascript")
     %a.view-thread(href="http://disqus.com/forums/ciboblog/?url=ref")
-      View the discussion thread.
+      Voir le fil de discussion
     %a.dsq-brlink(href="http://disqus.com")
-      blog comments powered by
+      les commentaires de ce blog sont administrés avec 
       %span.logo-disqus
         Disqus
     :script
